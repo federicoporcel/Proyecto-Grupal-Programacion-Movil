@@ -26,12 +26,13 @@ public class Clickable : MonoBehaviour
         else { return; }
         _worldPosition = Camera.main.ScreenToWorldPoint(_screenPosition);
         RaycastHit2D hit = Physics2D.Raycast(_worldPosition, Vector2.zero);
+        if (hit.collider != null) { 
         if (hit.collider.gameObject == this.gameObject)
         {
             Debug.Log("Si toco la trompeta. Ara ara areta");
             trumpetSFX.Play();
         }
-
+        }
 
     }
 }

@@ -83,7 +83,8 @@ public class Creature : MonoBehaviour
             {
                 creatureSFX.Play();
                     dragged.gameObject.SetActive(false);
-                Debug.Log("Git Test");
+                
+
             }
         } 
     }

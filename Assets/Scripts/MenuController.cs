@@ -11,10 +11,12 @@ public class MenuController : MonoBehaviour
     public GameObject criatura;
     public GameObject volverAMenuButton;
     public GameObject playScene;
+
+    public static MenuController instance;
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame

@@ -66,11 +66,13 @@ public class Creature : MonoBehaviour
         {
 
             SceneManager.LoadSceneAsync("Assets/Scenes/Home.unity");
-            Debug.Log("A Kasa");
+            Debug.Log("Entro la balubi");
         }
         if (collision.gameObject.CompareTag("Door"))
         {
+            
             SceneManager.LoadSceneAsync("Assets/Scenes/SampleScene.unity");
+            MenuController.instance.jugar();
         }
     }
 

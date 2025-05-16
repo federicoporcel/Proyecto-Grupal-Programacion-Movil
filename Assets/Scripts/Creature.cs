@@ -84,6 +84,7 @@ public class Creature : MonoBehaviour
             if (dragged.gameObject.CompareTag("Fruit"))
             {
                 creatureSFX.Play();
+                //Vibrator.Vibrate();
                     dragged.gameObject.SetActive(false);
                 
 

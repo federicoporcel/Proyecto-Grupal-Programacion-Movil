@@ -17,6 +17,8 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         instance = this;
+        //Vibrator.Vibrate();
+        Handheld.Vibrate();
     }
 
     // Update is called once per frame
@@ -59,6 +61,7 @@ public class MenuController : MonoBehaviour
 
     public void jugar()
     {
+        Handheld.Vibrate();
         volumenPanel.SetActive(false);
         jugarPanel.SetActive(false);
         criatura.SetActive(true);

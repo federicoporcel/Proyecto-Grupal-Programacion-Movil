@@ -8,6 +8,8 @@ public class Tree : MonoBehaviour
     Vector2 _screenPosition;
     private Vector3 _worldPosition;
 
+    [SerializeField] AudioSource treeSFX;
+
     [SerializeField] GameObject fruit;
     private void Update()
     {
@@ -27,6 +29,7 @@ public class Tree : MonoBehaviour
         if (hit.collider.gameObject == this.gameObject)
         {
             Debug.Log("Veo Veo. Pino");
+            treeSFX.Play();
             fruit.gameObject.SetActive(true);
         }
 

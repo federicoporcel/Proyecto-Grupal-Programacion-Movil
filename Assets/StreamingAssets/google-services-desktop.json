@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "13698958400",
+    "firebase_url": "https://trabajointegradorfb-default-rtdb.firebaseio.com",
     "project_id": "trabajointegradorfb",
     "storage_bucket": "trabajointegradorfb.firebasestorage.app"
   },

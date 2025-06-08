@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,6 +15,9 @@ public class Creature : MonoBehaviour
     [SerializeField] AudioSource creatureSFX;
     [SerializeField] AudioSource homeSFX;
     // Start is called before the first frame update
+
+    public int score = 0;
+    [SerializeField] TextMeshProUGUI scoreText;
     void Start()
     {
         rot = Vector3.zero;
@@ -34,6 +38,7 @@ public class Creature : MonoBehaviour
         transform.rotation = Input.gyro.attitude;
         Vector3 movementVector = new Vector3(movementInput.x, movementInput.y, 0);
         transform.position = transform.position + (movementVector);
+        scoreText.text = score.ToString();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -86,7 +91,7 @@ public class Creature : MonoBehaviour
                 creatureSFX.Play();
                 //Vibrator.Vibrate();
                     dragged.gameObject.SetActive(false);
-                
+                score += 1;
 
             }
         } 

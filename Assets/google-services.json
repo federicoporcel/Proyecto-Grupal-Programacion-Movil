@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "13698958400",
+    "project_id": "trabajointegradorfb",
+    "storage_bucket": "trabajointegradorfb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13698958400:android:3c44c62d063ddd287e0ba5",
+        "android_client_info": {
+          "package_name": "com.Juego"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAApH3AVX2UQcPo1ySi9ERoq-k5LDx0AWQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

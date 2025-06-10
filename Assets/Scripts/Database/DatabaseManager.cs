@@ -5,6 +5,7 @@ using Firebase.Database;
 using UnityEngine.UI;
 using Google.MiniJSON;
 using System;
+using System.IO;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -19,19 +20,23 @@ public class DatabaseManager : MonoBehaviour
 
     private DatabaseReference reference;
 
+    private static string filePath;
+
     void Start()
     {
         
         userID = SystemInfo.deviceUniqueIdentifier;
         reference= FirebaseDatabase.DefaultInstance.RootReference;
         //reference = FirebaseDatabase.GetInstance(databaseUrl).RootReference;
+        filePath = "/data.json";
     }
 
     public void CreateUser()
     {
-        User newUser= new User("TestUser", puntaje);
+        User newUser= new User("TestUserJson", puntaje);
         string json=JsonUtility.ToJson(newUser);
         reference.Child("Usuarios").SetRawJsonValueAsync(json);
+        File.WriteAllText(filePath, json);
         Debug.Log("User creado");
 
     }

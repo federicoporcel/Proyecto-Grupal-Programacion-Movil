@@ -103,7 +103,28 @@ public class DatabaseManager : MonoBehaviour
 
 
     }
+    public IEnumerator GetUsuarios(Action<String> oncallback)
+    {
+        int number = 1;
 
+        var userData = reference.Child("Usuarios").GetValueAsync();
+        Debug.Log(reference.Child("Usuarios").Child(number.ToString()).Child("nombre").GetValueAsync());
+        yield return new WaitUntil(predicate: () => userData.IsCompleted);
+        if (userData != null)
+        {
+            DataSnapshot snapshot = userData.Result;
+            Debug.Log(snapshot.Children);
+            foreach (var child in snapshot.Children)
+            {
+                Debug.Log($"{child.Value.ToString()}");
+                
+            }
+            oncallback.Invoke(snapshot.Value.ToString());
+            Debug.Log(snapshot.Value.ToString());
+        }
+
+
+    }
     //    //while (userData != null)
     //    //{
     //    //    Debug.Log(number);
@@ -137,4 +158,14 @@ public class DatabaseManager : MonoBehaviour
         
     }
 
+    public void BuscarUsuarios()
+    {
+        StartCoroutine(GetUsuarios((String nombre) =>
+        {
+            
+            
+
+        }));
+
+    }
 }

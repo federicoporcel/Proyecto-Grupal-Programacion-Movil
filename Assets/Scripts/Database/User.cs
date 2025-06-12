@@ -6,7 +6,8 @@ public class User
 {
     public string nombre;
     public int puntaje;
-
+    //public string id;
+    //public string creatureNombre;
     public User()
     {
     }
@@ -16,4 +17,12 @@ public class User
         this.nombre = name;
         this.puntaje= score;
     }
+
+    //public User(string name, int score, string userID, string creatureName)
+    //{
+        
+    //    this.nombre = name;
+    //    this.puntaje = score;
+    //    this.creatureNombre = creatureName;
+    //}
 }

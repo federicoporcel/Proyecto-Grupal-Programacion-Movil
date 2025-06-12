@@ -4,6 +4,7 @@ using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Creature : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Creature : MonoBehaviour
 
     public int score = 0;
     [SerializeField] TextMeshProUGUI scoreText;
+    
+
+    public string creatureName = "Chao";
     void Start()
     {
         rot = Vector3.zero;

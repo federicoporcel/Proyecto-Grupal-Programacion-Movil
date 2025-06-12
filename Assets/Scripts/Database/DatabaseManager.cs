@@ -7,6 +7,7 @@ using Google.MiniJSON;
 using System;
 using System.IO;
 using TMPro;
+using UnityEditor;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -28,9 +29,12 @@ public class DatabaseManager : MonoBehaviour
     [SerializeField] TMP_InputField userInputField;
     public string userName;
 
+    public List<User> usuariosParaRanking;
+
+    public static DatabaseManager instance { get; private set; }
     void Start()
     {
-        
+        instance = this;
         machineID = SystemInfo.deviceUniqueIdentifier;
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         //reference = FirebaseDatabase.GetInstance(databaseUrl).RootReference;
@@ -105,24 +109,56 @@ public class DatabaseManager : MonoBehaviour
     }
     public IEnumerator GetUsuarios(Action<String> oncallback)
     {
-        int number = 1;
-
-        var userData = reference.Child("Usuarios").GetValueAsync();
-        Debug.Log(reference.Child("Usuarios").Child(number.ToString()).Child("nombre").GetValueAsync());
+        int number = 5;
+        usuariosParaRanking = new List<User>();
+        while (number < actualKey) { 
+        var userData = reference.Child("Usuarios").Child(number.ToString()).GetValueAsync();
+       // Debug.Log(reference.Child("Usuarios").Child(number.ToString()).Child("nombre").GetValueAsync());
         yield return new WaitUntil(predicate: () => userData.IsCompleted);
         if (userData != null)
         {
             DataSnapshot snapshot = userData.Result;
             Debug.Log(snapshot.Children);
+                string nameForUser="";
+                int scoreForUser=0;
+                string idForUser="";
+                string creatureNameForUser = "";
             foreach (var child in snapshot.Children)
             {
-                Debug.Log($"{child.Value.ToString()}");
+                    
+                    Debug.Log($"{child.Key.ToString()}");
+                    switch (child.Key.ToString())
+                    {
+                        case "creatureNombre":
+                            Debug.Log("Llegue a la kriature");
+                            creatureNameForUser = child.Value.ToString();
+                        break;
+                        case "id":
+                            idForUser = child.Value.ToString();
+                            break;
+                            case "nombre":
+                            nameForUser = child.Value.ToString();
+                            break;
+                        case "puntaje":
+                            scoreForUser= Convert.ToInt32( child.Value.ToString());
+                            break;
+                    }
+                
                 
             }
-            oncallback.Invoke(snapshot.Value.ToString());
-            Debug.Log(snapshot.Value.ToString());
+                usuariosParaRanking.Add(new User(nameForUser, scoreForUser, idForUser, creatureNameForUser));
+                Debug.Log(usuariosParaRanking[0].nombre);
+                Debug.Log(usuariosParaRanking[0].id);
+                Debug.Log(usuariosParaRanking[0].creatureNombre);
+                Debug.Log(usuariosParaRanking[0].puntaje);
+                Debug.Log(usuariosParaRanking.Count);
+                //Debug.Log($"{child.Value.ToString()}");
+                //oncallback.Invoke(snapshot.Value.ToString());
+                Debug.Log(snapshot.Value.ToString());
+                ;
+            }
+        number++;
         }
-
 
     }
     //    //while (userData != null)

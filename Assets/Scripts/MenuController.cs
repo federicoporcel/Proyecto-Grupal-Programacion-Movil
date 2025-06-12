@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,17 +14,30 @@ public class MenuController : MonoBehaviour
     public GameObject playScene;
 
     public static MenuController instance;
+    List<User> userRanking;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         //Vibrator.Vibrate();
         Handheld.Vibrate();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        try
+        {
+            userRanking = DatabaseManager.instance.usuariosParaRanking.OrderByDescending(w => w.puntaje).ToList();
+            foreach (User user in userRanking)
+            {
+                Debug.Log(user.creatureNombre);
+            }
+        }
+        catch { 
+        
+        }
         
     }
 

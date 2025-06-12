@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -13,6 +14,9 @@ public class MenuController : MonoBehaviour
     public GameObject volverAMenuButton;
     public GameObject playScene;
 
+    [SerializeField] List<TextMeshProUGUI> rankingTextsName;
+    [SerializeField] List<TextMeshProUGUI> rankingTextsScore;
+    
     public static MenuController instance;
     List<User> userRanking;
     // Start is called before the first frame update
@@ -30,9 +34,16 @@ public class MenuController : MonoBehaviour
         try
         {
             userRanking = DatabaseManager.instance.usuariosParaRanking.OrderByDescending(w => w.puntaje).ToList();
-            foreach (User user in userRanking)
+            //foreach (User user in userRanking)
+            //{
+            //    Debug.Log(user.nombre);
+            //    Debug.Log(user.puntaje);
+            //}
+            Debug.Log("Lowest score" + userRanking[2].nombre + "Puntajue" + userRanking[2].puntaje);
+            for (int i = 0; i < userRanking.Count - 1&&i<3; i++)
             {
-                Debug.Log(user.creatureNombre);
+                rankingTextsName[i].text = userRanking[i].nombre;
+                rankingTextsScore[i].text = userRanking[i].puntaje.ToString();
             }
         }
         catch { 

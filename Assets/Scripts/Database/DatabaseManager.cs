@@ -74,6 +74,8 @@ public class DatabaseManager : MonoBehaviour
     private void Update()
     {
         puntaje = playerCreature.score;
+        BuscarUsuarios();
+
     }
 
 
@@ -147,11 +149,11 @@ public class DatabaseManager : MonoBehaviour
                 
             }
                 usuariosParaRanking.Add(new User(nameForUser, scoreForUser, idForUser, creatureNameForUser));
-                Debug.Log(usuariosParaRanking[0].nombre);
-                Debug.Log(usuariosParaRanking[0].id);
-                Debug.Log(usuariosParaRanking[0].creatureNombre);
-                Debug.Log(usuariosParaRanking[0].puntaje);
-                Debug.Log(usuariosParaRanking.Count);
+                //Debug.Log(usuariosParaRanking[0].nombre);
+                //Debug.Log(usuariosParaRanking[0].id);
+                //Debug.Log(usuariosParaRanking[0].creatureNombre);
+                //Debug.Log(usuariosParaRanking[0].puntaje);
+                //Debug.Log(usuariosParaRanking.Count);
                 //Debug.Log($"{child.Value.ToString()}");
                 //oncallback.Invoke(snapshot.Value.ToString());
                 Debug.Log(snapshot.Value.ToString());

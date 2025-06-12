@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Google.MiniJSON;
 using System;
 using System.IO;
+using TMPro;
 
 public class DatabaseManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class DatabaseManager : MonoBehaviour
     public string nombre;
     public int puntaje;
     public string key="";
+    public int actualKey ;
 
     [SerializeField] Creature playerCreature;
     private string machineID;
@@ -22,26 +24,27 @@ public class DatabaseManager : MonoBehaviour
     private DatabaseReference reference;
 
     private static string filePath;
-    [SerializeField] InputField creatureInputField;
-    [SerializeField] InputField userInputField;
+    [SerializeField] TMP_InputField creatureInputField;
+    [SerializeField] TMP_InputField userInputField;
     public string userName;
 
     void Start()
     {
-
+        
         machineID = SystemInfo.deviceUniqueIdentifier;
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         //reference = FirebaseDatabase.GetInstance(databaseUrl).RootReference;
         filePath = "/data.json";
         //filePath = Application.persistentDataPath;
         Debug.Log(Application.persistentDataPath);
+        Test();
     }
 
     public void CreateUser()
     {
-        User newUser = new User("TestUserJson", puntaje);
+        User newUser = new User(userName, puntaje, machineID, playerCreature.creatureName);
         string json = JsonUtility.ToJson(newUser);
-        reference.Child("Usuarios").Child("2").SetRawJsonValueAsync(json);
+        reference.Child("Usuarios").Child(actualKey.ToString()).SetRawJsonValueAsync(json);
         File.WriteAllText(filePath, json);
         Debug.Log("User creado");
 
@@ -121,7 +124,10 @@ public class DatabaseManager : MonoBehaviour
         StartCoroutine(GetLatestUserNumber((String nombre) =>
         {
             Debug.Log($"Ultimo numero cargado: {key}");
+            actualKey = Convert.ToInt32(key.ToString()) + 1;
+            
         }));
+       
     }
 
     public void SaveCreatureName()

@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class MenuController : MonoBehaviour
@@ -12,14 +13,23 @@ public class MenuController : MonoBehaviour
     public GameObject jugarPanel;
     public GameObject criatura;
     public GameObject volverAMenuButton;
+    [SerializeField] GameObject cargarAFBButton;
     public GameObject playScene;
+    [SerializeField] GameObject configurationPanel;
 
+    public UnityEngine.UI.Button keyboardButton;
     [SerializeField] List<TextMeshProUGUI> rankingTextsName;
     [SerializeField] List<TextMeshProUGUI> rankingTextsScore;
-    
+
+
+    public TouchScreenKeyboard keyboard;
+
     public static MenuController instance;
     List<User> userRanking;
+
+    [SerializeField] Creature playerCreature;
     // Start is called before the first frame update
+    
     void Start()
     {
         instance = this;
@@ -39,7 +49,7 @@ public class MenuController : MonoBehaviour
             //    Debug.Log(user.nombre);
             //    Debug.Log(user.puntaje);
             //}
-            Debug.Log("Lowest score" + userRanking[2].nombre + "Puntajue" + userRanking[2].puntaje);
+            //Debug.Log("Lowest score" + userRanking[2].nombre + "Puntaje" + userRanking[2].puntaje);
             for (int i = 0; i < userRanking.Count - 1&&i<3; i++)
             {
                 rankingTextsName[i].text = userRanking[i].nombre;
@@ -65,6 +75,7 @@ public class MenuController : MonoBehaviour
         jugarPanel.SetActive(true);
         criatura.SetActive(false);
         volverAMenuButton.SetActive(false);
+        configurationPanel.SetActive(false);
     }
     public static void MoveAndroidApplicationToBack()
     {
@@ -92,6 +103,34 @@ public class MenuController : MonoBehaviour
         criatura.SetActive(true);
         volverAMenuButton.SetActive(true);
         playScene.SetActive(true);
+        playerCreature.score = 0;
+        cargarAFBButton.gameObject.SetActive(true);
+        //DatabaseManager.instance.CreateUser();
+        
     }
+
+    public void Configure()
+    {
+        volumenPanel.SetActive(false);
+        jugarPanel.SetActive(false);
+        criatura.SetActive(false);
+        volverAMenuButton.SetActive(false);
+        configurationPanel.SetActive(true);
+        TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
+    }
+
+
+    public void OpenKeyboard()
+    {
+        TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false, false);
+    }
+
+    //private void OnGUI()
+    //{
+    //    if (GUI.Button((keyboardButton.GetComponent<RectTransform>().rect),"Default")){
+    //        Debug.Log("Fuck fuck fuck");
+    //        keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
+    //    }
+    //}
 
 }

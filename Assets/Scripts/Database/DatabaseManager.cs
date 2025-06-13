@@ -27,7 +27,7 @@ public class DatabaseManager : MonoBehaviour
     private static string filePath;
     [SerializeField] TMP_InputField creatureInputField;
     [SerializeField] TMP_InputField userInputField;
-    public string userName;
+    public string userName="DefaultUser";
 
     public List<User> usuariosParaRanking;
 
@@ -38,7 +38,7 @@ public class DatabaseManager : MonoBehaviour
         machineID = SystemInfo.deviceUniqueIdentifier;
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         //reference = FirebaseDatabase.GetInstance(databaseUrl).RootReference;
-        filePath = "/data.json";
+        filePath = "/"+userName+".json";
         //filePath = Application.persistentDataPath;
         Debug.Log(Application.persistentDataPath);
         Test();
@@ -51,7 +51,7 @@ public class DatabaseManager : MonoBehaviour
         reference.Child("Usuarios").Child(actualKey.ToString()).SetRawJsonValueAsync(json);
         File.WriteAllText(filePath, json);
         Debug.Log("User creado");
-
+        //Test();
 
     }
 
@@ -113,14 +113,14 @@ public class DatabaseManager : MonoBehaviour
     {
         int number = 5;
         usuariosParaRanking = new List<User>();
-        while (number < actualKey) { 
+        while (number <= actualKey) { 
         var userData = reference.Child("Usuarios").Child(number.ToString()).GetValueAsync();
        // Debug.Log(reference.Child("Usuarios").Child(number.ToString()).Child("nombre").GetValueAsync());
         yield return new WaitUntil(predicate: () => userData.IsCompleted);
         if (userData != null)
         {
             DataSnapshot snapshot = userData.Result;
-            Debug.Log(snapshot.Children);
+            //Debug.Log(snapshot.Children);
                 string nameForUser="";
                 int scoreForUser=0;
                 string idForUser="";
@@ -128,11 +128,11 @@ public class DatabaseManager : MonoBehaviour
             foreach (var child in snapshot.Children)
             {
                     
-                    Debug.Log($"{child.Key.ToString()}");
+                    //Debug.Log($"{child.Key.ToString()}");
                     switch (child.Key.ToString())
                     {
                         case "creatureNombre":
-                            Debug.Log("Llegue a la kriature");
+                      //      Debug.Log("Llegue a la kriature");
                             creatureNameForUser = child.Value.ToString();
                         break;
                         case "id":
@@ -156,7 +156,7 @@ public class DatabaseManager : MonoBehaviour
                 //Debug.Log(usuariosParaRanking.Count);
                 //Debug.Log($"{child.Value.ToString()}");
                 //oncallback.Invoke(snapshot.Value.ToString());
-                Debug.Log(snapshot.Value.ToString());
+                //Debug.Log(snapshot.Value.ToString());
                 ;
             }
         number++;
@@ -182,7 +182,7 @@ public class DatabaseManager : MonoBehaviour
     {
         StartCoroutine(GetLatestUserNumber((String nombre) =>
         {
-            Debug.Log($"Ultimo numero cargado: {key}");
+           // Debug.Log($"Ultimo numero cargado: {key}");
             actualKey = Convert.ToInt32(key.ToString()) + 1;
             
         }));

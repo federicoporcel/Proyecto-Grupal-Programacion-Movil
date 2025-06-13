@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 5980321230267785346}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.782468, y: 1.7032719, z: -0.019638687}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.8713, y: 1.5454, z: -0.019638687}
+  m_LocalScale: {x: 1.343945, y: 1.3322623, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6929477487644325381, guid: 855398484c6c4ff4aba436114cb8a2b9, type: 3}
+  m_Sprite: {fileID: -6947908723655371684, guid: ee4c41d4e3b54754db955efd1ade818b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,7 +128,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.6, y: 3.6}
+    oldSize: {x: 1.09, y: 0.95}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -164,6 +164,9 @@ MonoBehaviour:
   movementInput: {x: 0, y: 0}
   creatureSFX: {fileID: 0}
   homeSFX: {fileID: 0}
+  score: 0
+  scoreText: {fileID: 0}
+  creatureName: Chao
 --- !u!50 &1358367931312151472
 Rigidbody2D:
   serializedVersion: 4

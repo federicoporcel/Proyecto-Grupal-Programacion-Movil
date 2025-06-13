@@ -143,7 +143,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tree_sprite-removebg-preview_0: -4109320248498446407
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
